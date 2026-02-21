@@ -9,6 +9,7 @@ Automated daily tracking of ABN AMRO Netherlands mortgage interest rates with em
 - Applies ABN AMRO Bank Account discount (0.20%)
 - Tracks rates for 2, 3, 5, and 10-year fixed periods at ≤85% LTV
 - Sends formatted HTML email notifications
+- **Urgent alerts**: When 5-year rate drops below 3.3%, email is marked as high priority with "URGENT" in subject
 - Runs automatically at 9 AM CET via GitHub Actions
 
 ## Setup
