@@ -1,0 +1,31 @@
+{
+  "name": "mortgage-rate-tracker",
+  "version": "1.0.0",
+  "description": "Daily ABN AMRO mortgage rate tracker with email and WhatsApp notifications",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && node dist/index.js",
+    "dev": "ts-node src/index.ts"
+  },
+  "keywords": [
+    "mortgage",
+    "abn-amro",
+    "rates",
+    "notifications"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.7",
+    "dotenv": "^16.4.1",
+    "nodemailer": "^6.9.9",
+    "playwright": "^1.41.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "@types/nodemailer": "^6.4.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

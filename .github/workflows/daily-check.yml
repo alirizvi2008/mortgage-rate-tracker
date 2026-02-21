@@ -1,0 +1,48 @@
+name: Daily Mortgage Rate Check
+
+on:
+  schedule:
+    # Run at 8 AM UTC (9 AM CET / 10 AM CEST)
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+    # Allow manual trigger for testing
+
+jobs:
+  check-rates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install chromium --with-deps
+
+      - name: Run mortgage rate tracker
+        run: npm run start
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+          WHATSAPP_PHONE: ${{ secrets.WHATSAPP_PHONE }}
+          CALLMEBOT_API_KEY: ${{ secrets.CALLMEBOT_API_KEY }}
+
+      - name: Upload debug artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-logs
+          path: |
+            *.log
+            *.html
+          retention-days: 7
