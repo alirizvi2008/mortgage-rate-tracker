@@ -23,7 +23,7 @@ export async function scrapeRates(): Promise<RateResult> {
     const page = await context.newPage();
 
     console.log('Navigating to ABN AMRO rates page...');
-    await page.goto(ABN_AMRO_RATES_URL, { waitUntil: 'networkidle', timeout: 60000 });
+    await page.goto(ABN_AMRO_RATES_URL, { waitUntil: 'domcontentloaded', timeout: 90000 });
 
     // Handle OneTrust cookie consent
     await handleCookieConsent(page);
