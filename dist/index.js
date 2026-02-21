@@ -17,13 +17,21 @@ async function main() {
             console.log(`  - ${rate.interestPeriod}: ${rate.rate}`);
         }
         console.log('');
+        // Check if 5-year rate is below 3.3% threshold
+        const fiveYearRate = rateResult.rates.find(r => r.interestPeriod === '5 jaar');
+        const fiveYearValue = fiveYearRate ? parseFloat(fiveYearRate.rate.replace('%', '')) : null;
+        const isUrgent = fiveYearValue !== null && fiveYearValue < 3.3;
+        if (isUrgent) {
+            console.log('🚨 ALERT: 5-year rate is below 3.3% threshold!');
+            console.log('');
+        }
         // Step 2: Send email notification
         console.log('[2/2] Sending email notification...');
         await (0, email_1.sendEmail)(rateResult, {
             user: process.env.GMAIL_USER || '',
             appPassword: process.env.GMAIL_APP_PASSWORD || '',
             recipient: process.env.RECIPIENT_EMAIL || '',
-        });
+        }, isUrgent);
         console.log('');
         console.log('='.repeat(50));
         console.log('Done!');

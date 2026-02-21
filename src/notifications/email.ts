@@ -8,7 +8,7 @@ interface EmailConfig {
   recipient: string;
 }
 
-export async function sendEmail(result: RateResult, config: EmailConfig): Promise<void> {
+export async function sendEmail(result: RateResult, config: EmailConfig, urgent: boolean = false): Promise<void> {
   if (!config.user || !config.appPassword || !config.recipient) {
     console.log('Email configuration incomplete, skipping email notification.');
     return;
@@ -27,12 +27,22 @@ export async function sendEmail(result: RateResult, config: EmailConfig): Promis
   const htmlContent = formatHtmlEmail(result);
   const textContent = formatPlainText(result);
 
-  const mailOptions = {
+  const subject = urgent
+    ? `🚨 URGENT: ABN AMRO Mortgage Rates - ${result.date} - 5yr below 3.3%!`
+    : `📊 ABN AMRO Mortgage Rates - ${result.date}`;
+
+  const mailOptions: nodemailer.SendMailOptions = {
     from: `Mortgage Rate Tracker <${config.user}>`,
     to: config.recipient,
-    subject: `📊 ABN AMRO Mortgage Rates - ${result.date}`,
+    subject,
     text: textContent,
     html: htmlContent,
+    priority: urgent ? 'high' : 'normal',
+    headers: urgent ? {
+      'X-Priority': '1',
+      'X-MSMail-Priority': 'High',
+      'Importance': 'high',
+    } : undefined,
   };
 
   console.log(`Sending email to ${config.recipient}...`);

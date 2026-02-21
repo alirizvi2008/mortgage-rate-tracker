@@ -4,6 +4,6 @@ interface EmailConfig {
     appPassword: string;
     recipient: string;
 }
-export declare function sendEmail(result: RateResult, config: EmailConfig): Promise<void>;
+export declare function sendEmail(result: RateResult, config: EmailConfig, urgent?: boolean): Promise<void>;
 export {};
 //# sourceMappingURL=email.d.ts.map
