@@ -22,9 +22,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: |
-          npm cache clean --force
-          npm install
+        run: rm -f package-lock.json && npm install --legacy-peer-deps
 
       - name: Install Playwright browsers
         run: npx playwright install chromium --with-deps
