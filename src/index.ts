@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import { scrapeRates } from './scraper';
 import { sendEmail } from './notifications/email';
 

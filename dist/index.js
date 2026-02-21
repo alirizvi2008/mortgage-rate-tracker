@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-require("dotenv/config");
 const scraper_1 = require("./scraper");
 const email_1 = require("./notifications/email");
 async function main() {
