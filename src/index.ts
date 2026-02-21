@@ -1,7 +1,6 @@
 import 'dotenv/config';
 import { scrapeRates } from './scraper';
 import { sendEmail } from './notifications/email';
-import { sendWhatsApp } from './notifications/whatsapp';
 
 async function main(): Promise<void> {
   console.log('='.repeat(50));
@@ -11,7 +10,7 @@ async function main(): Promise<void> {
 
   try {
     // Step 1: Scrape rates from ABN AMRO
-    console.log('[1/3] Scraping mortgage rates...');
+    console.log('[1/2] Scraping mortgage rates...');
     const rateResult = await scrapeRates();
 
     console.log('');
@@ -22,7 +21,7 @@ async function main(): Promise<void> {
     console.log('');
 
     // Step 2: Send email notification
-    console.log('[2/3] Sending email notification...');
+    console.log('[2/2] Sending email notification...');
     await sendEmail(rateResult, {
       user: process.env.GMAIL_USER || '',
       appPassword: process.env.GMAIL_APP_PASSWORD || '',
@@ -30,16 +29,8 @@ async function main(): Promise<void> {
     });
     console.log('');
 
-    // Step 3: Send WhatsApp notification
-    console.log('[3/3] Sending WhatsApp notification...');
-    await sendWhatsApp(rateResult, {
-      phone: process.env.WHATSAPP_PHONE || '',
-      apiKey: process.env.CALLMEBOT_API_KEY || '',
-    });
-    console.log('');
-
     console.log('='.repeat(50));
-    console.log('All notifications sent successfully!');
+    console.log('Done!');
     console.log('='.repeat(50));
 
   } catch (error) {
