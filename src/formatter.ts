@@ -84,7 +84,7 @@ export function formatHtmlEmail(result: RateResult): string {
 
   <div style="background: #f5f5f5; padding: 16px; border: 1px solid #e0e0e0; border-top: none; border-radius: 0 0 12px 12px;">
     <p style="margin: 0; font-size: 12px; color: #888;">
-      Source: <a href="https://www.abnamro.nl/nl/prive/hypotheken/actuele-hypotheekrente.html" style="color: #004d40;">ABN AMRO Mortgage Rates</a><br>
+      Source: <a href="https://www.abnamro.nl/nl/prive/hypotheken/actuele-hypotheekrente/index.html" style="color: #004d40;">ABN AMRO Mortgage Rates</a><br>
       <em>Rates are indicative and subject to change.</em>
     </p>
   </div>
