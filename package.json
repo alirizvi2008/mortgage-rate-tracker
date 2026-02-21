@@ -17,15 +17,15 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@types/node": "^20.11.16",
+    "@types/nodemailer": "^6.4.14",
     "axios": "^1.6.7",
     "dotenv": "^16.4.1",
     "nodemailer": "^6.9.9",
-    "playwright": "^1.41.2"
+    "playwright": "^1.41.2",
+    "typescript": "^5.3.3"
   },
   "devDependencies": {
-    "@types/node": "^20.11.16",
-    "@types/nodemailer": "^6.4.14",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.3.3"
+    "ts-node": "^10.9.2"
   }
 }
